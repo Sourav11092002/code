@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" name="username" id="username" placeholder="username">
+    <input type="password" name="password" id="password" placeholder="password">
+    <button onclick="fetchData()">submit</button>
+    <script>
+        function fetchData() {
+            username = document.getElementById("username").value;
+            password = document.getElementById("password").value;
+            let obj = {
+                username: username,
+                password: password
+            }
+            fetch("/data", {
+                method: "Post",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify(obj)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.type == "true") {
+                        alert("valid");
+                    }
+                    else {
+                        alert("Invalid");
+                    }
+                })
+        }
+    </script>
+</body>
+
+</html>
